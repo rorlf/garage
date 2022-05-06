@@ -31,11 +31,13 @@ export default function useStyles() {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: colors.screenBackground,
       },
       errorContent: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: 'red',
       },
     });
   }, [colors]);
