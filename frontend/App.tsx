@@ -1,22 +1,16 @@
-import React from "react";
-import { View } from "react-native";
-import { StatusBar } from "expo-status-bar";
-import { Colors } from "./src/styles";
-
-import Garage from "./src/screens/Garage";
+import React from 'react';
+import { StatusBar } from 'expo-status-bar';
+import { NavigationContainer } from '@react-navigation/native';
+import { AppTabsNavigator } from 'navigators/AppTabsNavigator';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function App() {
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: Colors.backgroundColor,
-        alignItems: "flex-start",
-        justifyContent: "center",
-      }}
-    >
+    <NavigationContainer>
       <StatusBar style="auto" />
-      <Garage />
-    </View>
+      <SafeAreaView style={{ flex: 1 }}>
+        <AppTabsNavigator />
+      </SafeAreaView>
+    </NavigationContainer>
   );
 }
