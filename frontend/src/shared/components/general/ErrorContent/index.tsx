@@ -7,6 +7,8 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 // Hooks
 import { useTheme } from 'store/slices/themeSlice';
+
+// Styles
 import useStyles from './styles';
 
 interface Props {
