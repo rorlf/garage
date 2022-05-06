@@ -9,6 +9,9 @@ import { AppNavigatorParams } from './types';
 // Navigators
 import { AppTabsNavigator } from 'navigators/AppTabsNavigator';
 
+// Screens
+import { CarDetailScreen } from 'screens';
+
 const { Navigator, Screen } = createStackNavigator<AppNavigatorParams>();
 
 export const AppNavigator = () => {
@@ -20,12 +23,7 @@ export const AppNavigator = () => {
       }}
     >
       <Screen name="AppTabsNavigator" component={AppTabsNavigator} />
-      <Screen name="CarDetailScreen" component={EmptyScreen} />
+      <Screen name="CarDetailScreen" component={CarDetailScreen} />
     </Navigator>
   );
 };
-
-function EmptyScreen() {
-  // @todo
-  return null;
-}

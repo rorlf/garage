@@ -1,9 +1,10 @@
 import { NavigatorScreenParams } from '@react-navigation/native';
 import { AppTabsNavigatorParams } from 'navigators/AppTabsNavigator/types';
+import { Car } from 'services/GarageService/types';
 
 export type AppNavigatorParams = {
   AppTabsNavigator: NavigatorScreenParams<AppTabsNavigatorParams>;
-  CarDetailScreen: undefined;
+  CarDetailScreen: Car;
 };
 
 declare global {
