@@ -1,4 +1,4 @@
 export type AppTabsNavigatorParams = {
-  GarageScreen: undefined;
-  FavoritesScreen: undefined;
+  GarageTab: undefined;
+  FavoritesTab: undefined;
 };

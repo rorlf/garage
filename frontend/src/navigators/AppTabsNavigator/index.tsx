@@ -15,11 +15,20 @@ import { FavoritesScreen, GarageScreen } from 'screens';
 // Hooks
 import { useTheme } from 'store/slices/themeSlice';
 
+// Utils
+import { wrapInSharedElementStack } from 'shared/utils/navigators';
+
 // Styles
 import useStyles from './styles';
 
 const { Navigator, Screen } =
   createBottomTabNavigator<AppTabsNavigatorParams>();
+
+const GarageTab = wrapInSharedElementStack(GarageScreen, 'GarageScreen');
+const FavoritesTab = wrapInSharedElementStack(
+  FavoritesScreen,
+  'FavoritesScreen'
+);
 
 export const AppTabsNavigator = () => {
   const { colors } = useTheme();
@@ -35,8 +44,8 @@ export const AppTabsNavigator = () => {
       }}
     >
       <Screen
-        name="GarageScreen"
-        component={GarageScreen}
+        name="GarageTab"
+        component={GarageTab}
         options={{
           tabBarLabel: 'Garage',
           tabBarIcon: ({ color, size }) => (
@@ -45,8 +54,8 @@ export const AppTabsNavigator = () => {
         }}
       />
       <Screen
-        name="FavoritesScreen"
-        component={FavoritesScreen}
+        name="FavoritesTab"
+        component={FavoritesTab}
         options={{
           tabBarLabel: 'Favorites',
           tabBarIcon: ({ color, size }) => (

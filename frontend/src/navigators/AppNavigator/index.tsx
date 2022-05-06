@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Dependencies
-import { createStackNavigator } from '@react-navigation/stack';
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 
 // Types
 import { AppNavigatorParams } from './types';
@@ -12,7 +12,8 @@ import { AppTabsNavigator } from 'navigators/AppTabsNavigator';
 // Screens
 import { CarDetailScreen } from 'screens';
 
-const { Navigator, Screen } = createStackNavigator<AppNavigatorParams>();
+const { Navigator, Screen } =
+  createSharedElementStackNavigator<AppNavigatorParams>();
 
 export const AppNavigator = () => {
   return (
@@ -23,7 +24,13 @@ export const AppNavigator = () => {
       }}
     >
       <Screen name="AppTabsNavigator" component={AppTabsNavigator} />
-      <Screen name="CarDetailScreen" component={CarDetailScreen} />
+      <Screen
+        name="CarDetailScreen"
+        component={CarDetailScreen}
+        sharedElements={(route) => {
+          return [`${route.params.id}`];
+        }}
+      />
     </Navigator>
   );
 };
