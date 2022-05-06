@@ -19,7 +19,7 @@ export const AppNavigator = () => {
         headerShown: false,
       }}
     >
-      <Screen name="HomeNavigator" component={AppTabsNavigator} />
+      <Screen name="AppTabsNavigator" component={AppTabsNavigator} />
       <Screen name="CarDetailScreen" component={EmptyScreen} />
     </Navigator>
   );
