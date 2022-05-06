@@ -1,19 +1,19 @@
-import React from "react";
-import { View, Text, Image } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
-import { useScreenDimensions } from "../../hooks/useScreenDimensions";
-import { Colors } from "../../styles";
+import React from 'react';
+import { View, Text, Image } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
+import { useScreenDimensions } from '../../hooks/useScreenDimensions';
+import { Colors } from '../../styles';
 
-import { styles } from "./styles";
+import { styles } from './styles';
 
 // Placeholder
 const car = {
-  model: "RS7 4.0",
-  make: "Audi",
+  model: 'RS7 4.0',
+  make: 'Audi',
   year: 2015,
 };
 
-const image = require("../../../assets/placeholder.png");
+const image = require('../../../assets/placeholder.png');
 
 interface StarProps {
   star: boolean;
@@ -22,12 +22,12 @@ interface StarProps {
 export const StarIcon = (props: StarProps) => (
   <AntDesign
     size={24}
-    name={props.star ? "star" : "staro"}
+    name={props.star ? 'star' : 'staro'}
     color={props.star ? Colors.starColor : Colors.textColor}
   />
 );
 
-const Garage = () => {
+export const GarageScreen = () => {
   const size = useScreenDimensions();
 
   return (
@@ -37,7 +37,7 @@ const Garage = () => {
           <Image
             source={image}
             style={{
-              width: "100%",
+              width: '100%',
               height: size.width * 0.5,
             }}
           />
@@ -56,5 +56,3 @@ const Garage = () => {
     </View>
   );
 };
-
-export default Garage;

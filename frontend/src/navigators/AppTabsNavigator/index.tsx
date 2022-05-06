@@ -7,7 +7,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { AppTabsNavigatorParams } from './types';
 
 // Screens
-import Garage from 'screens/Garage';
+import { GarageScreen } from 'screens';
 
 const { Navigator, Screen } =
   createBottomTabNavigator<AppTabsNavigatorParams>();
@@ -19,7 +19,7 @@ export const AppTabsNavigator = () => {
         headerShown: false,
       }}
     >
-      <Screen name="GarageScreen" component={Garage} />
+      <Screen name="GarageScreen" component={GarageScreen} />
       <Screen name="FavoritesScreen" component={EmptyScreen} />
     </Navigator>
   );
