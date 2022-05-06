@@ -10,6 +10,7 @@ import {
   ErrorContent,
   Headline,
   Loading,
+  ThemeSwitch,
 } from 'shared/components';
 
 // Types
@@ -55,8 +56,13 @@ export const GarageScreen = () => {
   );
 
   const renderHeader = useCallback(
-    () => <Headline style={styles.title}>Garage</Headline>,
-    []
+    () => (
+      <View style={styles.header}>
+        <Headline style={styles.title}>Garage</Headline>
+        <ThemeSwitch />
+      </View>
+    ),
+    [styles]
   );
 
   const renderFooter = useCallback(() => <View style={styles.footer} />, []);
