@@ -3,6 +3,7 @@ import React, { useCallback } from 'react';
 // Components
 import { View, FlatList } from 'react-native';
 import { Body, CarItemCard, Headline, ThemeSwitch } from 'shared/components';
+import { SharedElement } from 'react-navigation-shared-element';
 
 // Types
 import { Car } from 'services/GarageService/types';
@@ -17,7 +18,7 @@ import useStyles from './styles';
 
 type ScreenNavigationProp = NavigationProp<
   AppTabsNavigatorParams,
-  'FavoritesScreen'
+  'FavoritesTab'
 >;
 
 export const FavoritesScreen = () => {
@@ -26,11 +27,15 @@ export const FavoritesScreen = () => {
   const { data: favoriteCars } = useFavoriteCars();
 
   function onPressAddCars() {
-    navigate('GarageScreen');
+    navigate('GarageTab');
   }
 
   const renderCarItem = useCallback(
-    ({ item: car }: { item: Car }) => <CarItemCard {...car} />,
+    ({ item: car }: { item: Car }) => (
+      <SharedElement id={car.id}>
+        <CarItemCard {...car} />
+      </SharedElement>
+    ),
     []
   );
 

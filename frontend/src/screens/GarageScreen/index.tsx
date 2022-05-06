@@ -12,6 +12,7 @@ import {
   Loading,
   ThemeSwitch,
 } from 'shared/components';
+import { SharedElement } from 'react-navigation-shared-element';
 
 // Types
 import { Car } from 'services/GarageService/types';
@@ -51,7 +52,11 @@ export const GarageScreen = () => {
   }
 
   const renderCarItem = useCallback(
-    ({ item: car }: { item: Car }) => <CarItemCard {...car} />,
+    ({ item: car }: { item: Car }) => (
+      <SharedElement id={car.id}>
+        <CarItemCard {...car} />
+      </SharedElement>
+    ),
     []
   );
 
