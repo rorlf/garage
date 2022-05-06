@@ -5,7 +5,8 @@ import { baseUrl } from 'config/api';
 
 // Components
 import { View, Image } from 'react-native';
-import { Body, Star, Title } from 'shared/components';
+import { Body, Title } from 'shared/components/typographies';
+import { Star } from 'shared/components/general/Star';
 
 // Store
 import {
