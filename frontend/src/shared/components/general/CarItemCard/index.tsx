@@ -4,7 +4,7 @@ import React, { useMemo } from 'react';
 import { baseUrl } from 'config/api';
 
 // Components
-import { View, Image } from 'react-native';
+import { View, Image, TouchableOpacity } from 'react-native';
 import { Body, Title } from 'shared/components/typographies';
 import { Star } from 'shared/components/general/Star';
 
@@ -20,11 +20,17 @@ import { Car } from 'services/GarageService/types';
 
 // Hooks
 import { useDispatch } from 'store/hooks';
+import { useNavigation } from '@react-navigation/native';
 
 // Styles
 import useStyles from './styles';
 
-export const CarItemCard = (car: Car) => {
+interface Props extends Car {
+  isDisabled?: boolean;
+}
+
+export const CarItemCard = ({ isDisabled, ...car }: Props) => {
+  const { navigate } = useNavigation();
   const { id, image, make, model, year } = car;
   const dispatch = useDispatch();
   const styles = useStyles();
@@ -35,6 +41,10 @@ export const CarItemCard = (car: Car) => {
     [favoriteCars]
   );
 
+  function onPressCar() {
+    navigate('CarDetailScreen', car);
+  }
+
   function onPressStar() {
     if (isFavorite) {
       dispatch(removeCar(car.id));
@@ -44,11 +54,15 @@ export const CarItemCard = (car: Car) => {
   }
 
   return (
-    <View style={styles.card}>
+    <TouchableOpacity
+      disabled={isDisabled}
+      onPress={onPressCar}
+      style={styles.card}
+    >
       <Image source={imageSource} style={styles.carImage} />
       <View style={styles.details}>
         <View style={styles.header}>
-          <Title style={styles.model}>{model}</Title>
+          <Title>{model}</Title>
           <Star onPress={onPressStar} isActive={isFavorite} />
         </View>
         <View style={styles.line} />
@@ -56,6 +70,6 @@ export const CarItemCard = (car: Car) => {
           {make} | {year}
         </Body>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };

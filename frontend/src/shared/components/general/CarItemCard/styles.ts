@@ -33,9 +33,6 @@ export default function useStyles() {
         justifyContent: 'space-between',
         paddingVertical: spacing(3),
       },
-      model: {
-        fontSize: 30,
-      },
       line: {
         height: 1,
         backgroundColor: colors.divisorColor,
