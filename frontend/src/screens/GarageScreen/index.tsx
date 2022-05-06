@@ -1,58 +1,87 @@
-import React from 'react';
-import { View, Text, Image } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
-import { useScreenDimensions } from '../../hooks/useScreenDimensions';
-import { Colors } from '../../styles';
+import React, { useCallback, useEffect, useState } from 'react';
 
-import { styles } from './styles';
+// Services
+import { getCars } from 'services';
 
-// Placeholder
-const car = {
-  model: 'RS7 4.0',
-  make: 'Audi',
-  year: 2015,
-};
+// Components
+import { View, FlatList } from 'react-native';
+import {
+  CarItemCard,
+  ErrorContent,
+  Headline,
+  Loading,
+} from 'shared/components';
 
-const image = require('../../../assets/placeholder.png');
+// Types
+import { Car } from 'services/GarageService/types';
 
-interface StarProps {
-  star: boolean;
-}
-
-export const StarIcon = (props: StarProps) => (
-  <AntDesign
-    size={24}
-    name={props.star ? 'star' : 'staro'}
-    color={props.star ? Colors.starColor : Colors.textColor}
-  />
-);
+// Styles
+import useStyles from './styles';
 
 export const GarageScreen = () => {
-  const size = useScreenDimensions();
+  const styles = useStyles();
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string>();
+  const [cars, setCars] = useState<Car[]>([]);
+
+  useEffect(() => {
+    obtainCars();
+  }, []);
+
+  async function obtainCars() {
+    setIsLoading(true);
+    setError(undefined);
+    try {
+      const response = await getCars();
+
+      setCars(response.items);
+    } catch (error) {
+      handleError(error);
+    }
+    setIsLoading(false);
+  }
+
+  function handleError(error: unknown) {
+    let errorMessage = 'Error occurred';
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+    setError(errorMessage);
+  }
+
+  const renderCarItem = useCallback(
+    ({ item: car }: { item: Car }) => <CarItemCard {...car} />,
+    []
+  );
+
+  const renderHeader = useCallback(
+    () => <Headline style={styles.title}>Garage</Headline>,
+    []
+  );
+
+  const renderFooter = useCallback(() => <View style={styles.footer} />, []);
+
+  if (isLoading) return <Loading style={styles.loading} />;
+
+  if (error)
+    return (
+      <ErrorContent
+        style={styles.errorContent}
+        message={error}
+        onPressRetry={obtainCars}
+      />
+    );
 
   return (
-    <View style={styles.container}>
-      <View style={styles.list}>
-        <View style={styles.card}>
-          <Image
-            source={image}
-            style={{
-              width: '100%',
-              height: size.width * 0.5,
-            }}
-          />
-          <View style={styles.details}>
-            <View style={styles.header}>
-              <Text style={styles.model}>{car.model}</Text>
-              <StarIcon star={true} />
-            </View>
-            <View style={styles.line} />
-            <Text style={styles.makeYear}>
-              {car.make} | {car.year}
-            </Text>
-          </View>
-        </View>
-      </View>
+    <View style={styles.screen}>
+      <FlatList
+        data={cars}
+        renderItem={renderCarItem}
+        ListHeaderComponent={renderHeader}
+        ListFooterComponent={renderFooter}
+        showsVerticalScrollIndicator={false}
+        overScrollMode="never"
+      />
     </View>
   );
 };
