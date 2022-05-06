@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 
 // Components
 import { View, FlatList } from 'react-native';
-import { Body, CarItemCard, Headline } from 'shared/components';
+import { Body, CarItemCard, Headline, ThemeSwitch } from 'shared/components';
 
 // Types
 import { Car } from 'services/GarageService/types';
@@ -35,8 +35,13 @@ export const FavoritesScreen = () => {
   );
 
   const renderHeader = useCallback(
-    () => <Headline style={styles.title}>Favorites</Headline>,
-    []
+    () => (
+      <View style={styles.header}>
+        <Headline style={styles.title}>Favorites</Headline>
+        <ThemeSwitch />
+      </View>
+    ),
+    [styles]
   );
 
   const renderEmpty = useCallback(

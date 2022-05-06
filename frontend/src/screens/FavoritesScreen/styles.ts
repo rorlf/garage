@@ -14,9 +14,15 @@ export default function useStyles() {
         paddingHorizontal: metrics.screenPadding,
         backgroundColor: colors.screenBackground,
       },
+      header: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingRight: spacing(2),
+        paddingTop: spacing(4),
+      },
       title: {
         color: colors.textColor,
-        paddingTop: spacing(4),
       },
       emptyLabel: {
         textDecorationLine: 'underline',
