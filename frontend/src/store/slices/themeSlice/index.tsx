@@ -1,14 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { darkColors, lightColors } from 'shared/styles/colors';
 import { useSelector } from 'store/hooks';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { persistReducer } from 'redux-persist';
 
 const initialState = {
   isDark: false,
   colors: lightColors,
 };
 
+const key = 'theme';
+
 export const slice = createSlice({
-  name: 'theme',
+  name: key,
   initialState,
   reducers: {
     toggleTheme: (state) => {
@@ -27,4 +31,10 @@ export const { toggleTheme } = slice.actions;
 
 export const useTheme = () => useSelector((state) => state.theme);
 
-export default slice.reducer;
+const persistConfig = {
+  key,
+  storage: AsyncStorage,
+};
+const persistedReducer = persistReducer(persistConfig, slice.reducer);
+
+export default persistedReducer;
