@@ -1,20 +1,16 @@
 import React from 'react';
 
 // Components
-import { ActivityIndicator, StyleProp, View, ViewStyle } from 'react-native';
+import { ActivityIndicator, View, ViewProps } from 'react-native';
 
 // Hooks
 import { useTheme } from 'store/slices/themeSlice';
 
-interface Props {
-  style?: StyleProp<ViewStyle>;
-}
-
-export const Loading = ({ style }: Props) => {
+export const Loading = ({ ...viewProps }: ViewProps) => {
   const { colors } = useTheme();
 
   return (
-    <View style={style}>
+    <View {...viewProps}>
       <ActivityIndicator size="large" color={colors.textColor} />
     </View>
   );
