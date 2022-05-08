@@ -75,11 +75,13 @@ export const GarageScreen = () => {
 
   const renderFooter = useCallback(() => <View style={styles.footer} />, []);
 
-  if (isLoading) return <Loading style={styles.loading} />;
+  if (isLoading)
+    return <Loading testID="GarageScreen.loading" style={styles.loading} />;
 
   if (error)
     return (
       <ErrorContent
+        testID="GarageScreen.error"
         style={styles.errorContent}
         message={error}
         onPressRetry={obtainCars}
