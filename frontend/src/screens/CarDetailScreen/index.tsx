@@ -35,7 +35,11 @@ export const CarDetailScreen = () => {
 
   return (
     <View style={styles.screen}>
-      <TouchableOpacity onPress={goBack} style={styles.backButtonContainer}>
+      <TouchableOpacity
+        testID="CarDetailScreen.backButton"
+        onPress={goBack}
+        style={styles.backButtonContainer}
+      >
         <FontAwesome size={30} color={colors.textColor} name="arrow-left" />
       </TouchableOpacity>
       <SharedElement id={car.id}>
