@@ -10,7 +10,8 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "*": ["src/*"]
+      "*": ["src/*"],
+      "jest/*": ["jest/*"]
     }
   },
   "extends": "expo/tsconfig.base"
