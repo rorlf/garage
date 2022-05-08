@@ -27,9 +27,16 @@ import useStyles from './styles';
 
 interface Props extends Car {
   isDisabled?: boolean;
+  testID?: string;
+  starTestID?: string;
 }
 
-export const CarItemCard = ({ isDisabled, ...car }: Props) => {
+export const CarItemCard = ({
+  isDisabled,
+  testID,
+  starTestID,
+  ...car
+}: Props) => {
   const { navigate } = useNavigation();
   const { id, image, make, model, year } = car;
   const dispatch = useDispatch();
@@ -58,12 +65,17 @@ export const CarItemCard = ({ isDisabled, ...car }: Props) => {
       disabled={isDisabled}
       onPress={onPressCar}
       style={styles.card}
+      testID={testID}
     >
       <Image source={imageSource} style={styles.carImage} />
       <View style={styles.details}>
         <View style={styles.header}>
           <Title>{model}</Title>
-          <Star onPress={onPressStar} isActive={isFavorite} />
+          <Star
+            testID={starTestID}
+            onPress={onPressStar}
+            isActive={isFavorite}
+          />
         </View>
         <View style={styles.line} />
         <Body style={styles.makeYear}>
