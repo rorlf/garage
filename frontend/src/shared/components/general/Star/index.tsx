@@ -10,13 +10,14 @@ import { useTheme } from 'store/slices/themeSlice';
 interface Props {
   isActive: boolean;
   onPress?: () => void;
+  testID?: string;
 }
 
-export const Star = ({ isActive, onPress }: Props) => {
+export const Star = ({ isActive, onPress, testID }: Props) => {
   const { colors } = useTheme();
 
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity testID={testID} onPress={onPress}>
       <AntDesign
         size={24}
         name={isActive ? 'star' : 'staro'}
