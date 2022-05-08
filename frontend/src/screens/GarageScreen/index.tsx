@@ -6,6 +6,7 @@ import { getCars } from 'services';
 // Components
 import { View, FlatList } from 'react-native';
 import {
+  Body,
   CarItemCard,
   ErrorContent,
   Headline,
@@ -70,6 +71,8 @@ export const GarageScreen = () => {
     [styles]
   );
 
+  const renderEmpty = useCallback(() => <Body>No cars</Body>, []);
+
   const renderFooter = useCallback(() => <View style={styles.footer} />, []);
 
   if (isLoading) return <Loading style={styles.loading} />;
@@ -89,6 +92,7 @@ export const GarageScreen = () => {
         data={cars}
         renderItem={renderCarItem}
         ListHeaderComponent={renderHeader}
+        ListEmptyComponent={renderEmpty}
         ListFooterComponent={renderFooter}
         showsVerticalScrollIndicator={false}
         overScrollMode="never"
