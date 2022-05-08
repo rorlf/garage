@@ -11,7 +11,11 @@ import { useDispatch } from 'store/hooks';
 // Styles
 import useStyles from './styles';
 
-export const ThemeSwitch = () => {
+interface Props {
+  testID?: string;
+}
+
+export const ThemeSwitch = ({ testID }: Props) => {
   const styles = useStyles();
   const dispatch = useDispatch();
   const { isDark, colors } = useTheme();
@@ -21,7 +25,7 @@ export const ThemeSwitch = () => {
   }
 
   return (
-    <TouchableOpacity onPress={toggle} style={styles.container}>
+    <TouchableOpacity testID={testID} onPress={toggle} style={styles.container}>
       <FontAwesome
         size={20}
         color={colors.textColor}
