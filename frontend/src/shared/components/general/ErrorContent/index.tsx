@@ -16,6 +16,7 @@ interface Props {
   message: string;
   onPressRetry: () => void;
   retryTestID?: string;
+  testID?: string;
 }
 
 export const ErrorContent = ({
@@ -23,12 +24,13 @@ export const ErrorContent = ({
   onPressRetry,
   style,
   retryTestID,
+  testID,
 }: Props) => {
   const { colors } = useTheme();
   const styles = useStyles();
 
   return (
-    <View style={[styles.container, style]}>
+    <View testID={testID} style={[styles.container, style]}>
       <MaterialCommunityIcons name="alert" size={60} color={colors.error} />
       <Body>{message}</Body>
       <TouchableOpacity
